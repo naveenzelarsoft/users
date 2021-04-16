@@ -1,4 +1,4 @@
-java
+maven
 mysql
 INSERT INTO users (username, firstname, lastname, role) VALUES
   ('admin', 'Foo', 'Bar', 1),
