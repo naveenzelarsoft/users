@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+    stages {
+      stage ('Prepare Artifacts') {
+        steps {
+          sh '''
+             zip -r ../users.zip . -i *
+          '''
+          }
+        }
+     stage ('Upload Artifact') {
+        steps {
+        sh '''
+          curl -v -u admin:admin --upload-file users.zip http://3.238.150.185:8081/repository/users/users.zip
+         
+           ''' 
+          }
+        }
+     }
+  }
