@@ -1,36 +1,9 @@
 @Library('todos') _
-pipeline {
-  agent {
-             label 'dev'
-          }
 
-    tools {
-                 maven 'mvn3.6.3'
-
-             }
-    stages {
-
-      stage ('Build Project'){
-       steps {
-       sh '''
-          mvn clean package
-          '''
-       }
-      }
-      stage ('Prepare Artifacts') {
-        steps {
-          sh '''
-            cp target/users-api-0.0.1.jar users.jar
-            zip -r users.zip users.jar
-          '''
-          }
-        }
-     stage ('Upload Artifact') {
-        steps {
-           script {
-             nexus
-           }
-          }
-        }
-     }
-  }
+todos(
+ COMPONENT         : 'users',
+ PROJECT_NAME      : "todos",
+ SLAVE_LABEL       : "DEV",
+ APP_TYPE          : "MAVEN",
+ SKIP_NEXUS_UPLOAD : true
+)
