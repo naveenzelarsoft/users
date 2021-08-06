@@ -6,6 +6,6 @@ COPY        pom.xml .
 RUN         mvn package
 
 FROM        openjdk:8-jre-slim
-COPY        --from=BUILD /app/target/users-0.0.1.jar users.jar
+COPY        --from=BUILD /app/target/users-api0.0.1.jar users.jar
 CMD         ["java", "-jar", "users.jar"]
 EXPOSE      8080
